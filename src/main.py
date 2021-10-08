@@ -1,21 +1,32 @@
 import os
+import re
 import sys
+import pandas
 import pkg_list as pl
 import inspector as ins
 import pkg_analysis as pa
+#
+
+if pandas:
+    print("lol")
 
 
-def main_helper(foo_di):
+def main_helper(key, foo_di):
     p = os.path.abspath(os.getcwd())
     p += "/pckgs_srcode/mypckgs.txt"
-    print(foo_di)
-    print(p)
     try:
         f = open(p, "r")
     except:
         f = open(p, "w")
-    file_content = f.read()
-    print(file_content)
+
+    for line in f:
+        wordList = re.sub("[^\w]", " ",  line).split()
+        for word in wordList:
+            if word in foo_di[key]:
+                foo_di[key][word] += 1
+
+    print(foo_di)
+
     f.close()
 
 
@@ -26,7 +37,7 @@ def main():
     ins.package_srccode_extractor(mods)
     foo_li = pa.pkg_list(args[0])
 
-    print(main_helper(foo_li))
+    main_helper(args[0], foo_li)
     return None
 
 
