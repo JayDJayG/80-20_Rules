@@ -23,12 +23,15 @@ def package_srccode_extractor(mods):
     p += "/pckgs_srcode/mypckgs.txt"
 
     try:
-        f = open(p, "x")
-    except:
         f = open(p, "w")
+    except:
+        f = open(p, "x")
 
     for pkg in mods:
-        f.write(inspect.getsource(mods[pkg]))
+        try:
+            f.write(inspect.getsource(mods[pkg]))
+        except:
+            pass
 
     f.close()
 

@@ -15,7 +15,6 @@ def main_helper(foo_di):
     except:
         f = open(p, "w")
     file_content = f.read()
-    print(file_content)
     f.close()
 
 
