@@ -1,11 +1,13 @@
 import inspect
-import pkg_list as pl
+import os
 
 
-def pkg_importer():
-    pck_list = pl.library_lister()
+def pkg_importer(li):
+    """
+    Import all the packages found within the environment
+    """
     modules = {}
-    for x in pck_list:
+    for x in li:
         try:
             modules[x] = __import__(x)
         except ImportError:
@@ -13,20 +15,25 @@ def pkg_importer():
     return modules
 
 
-def package_foos():
-    mods = pkg_importer()
-    d = dict()
+def package_srccode_extractor(mods):
+    """
+    Writes all the source code to a file
+    """
+    p = os.path.abspath(os.getcwd())
+    p += "/pckgs_srcode/mypckgs.txt"
+
+    try:
+        f = open(p, "x")
+    except:
+        f = open(p, "w")
 
     for pkg in mods:
-        d[pkg] = inspect.getsource(mods[pkg])
+        f.write(inspect.getsource(mods[pkg]))
 
-    return d
+    f.close()
 
 
-real = package_foos()
-print(real)
-# print(real)
-# help(pck_list[0])
-# source_DF =
-
-# print(source_DF)
+def pckgs_to_dict(mods):
+    d = dict()
+    for pck in mods:
+        pass
