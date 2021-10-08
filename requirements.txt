@@ -1,0 +1,4 @@
+pandas==1.2.4
+compose==1.2.7
+pip == 21.2.4
+dill == 0.3.4
