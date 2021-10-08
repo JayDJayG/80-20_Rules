@@ -28,7 +28,10 @@ def package_srccode_extractor(mods):
         f = open(p, "w")
 
     for pkg in mods:
-        f.write(inspect.getsource(mods[pkg]))
+        try:
+            f.write(inspect.getsource(mods[pkg]))
+        except:
+            pass
 
     f.close()
 

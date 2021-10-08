@@ -1,15 +1,9 @@
 import os
 import re
 import sys
-import pandas
 import pkg_list as pl
 import inspector as ins
 import pkg_analysis as pa
-#
-
-if pandas:
-    print("lol")
-
 
 def main_helper(key, foo_di):
     p = os.path.abspath(os.getcwd())
